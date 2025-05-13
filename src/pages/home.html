@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Flex ORTHODONTICS</title>
+    <link rel="stylesheet" href="../css/form.css">
+    <link rel="icon" href="../images/logo_sin_fondo.ico" type="image/png">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../images/logo_index.png" alt="Logo">
+        </div>
+    </header>
+    <main>
+        <!-- Formulario para ingresar el precio total del tratamiento y los meses en los que se divide -->
+        <form class="form-container" id="treatmentForm">
+            <div class="form-group">
+                <label for="totalPrice">Total treatment price</label>
+                <input type="number" id="totalPrice" name="totalPrice" placeholder="Introduce el precio total" required>
+            </div>
+            <div class="form-group">
+                <label for="treatmentMonths">Months</label>
+                <input type="number" id="treatmentMonths" name="treatmentMonths" placeholder="Introduce los meses" required>
+            </div>
+            <button type="submit" class="submit-button">Send</button>
+        </form>
+        <script src="../js/form.js"></script>
+    </main>
+</body>
+</html>

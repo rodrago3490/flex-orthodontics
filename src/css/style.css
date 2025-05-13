@@ -1,0 +1,235 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fff;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 20px;
+}
+
+/* Centrar la imagen del logo */
+.logo {
+    width: 100px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto; /* Separación de la parte superior e inferior */
+}
+
+/* Ajustar el tamaño de la imagen del logo */
+.logo img {
+    max-width: 750px; /* Ajusta el ancho máximo */
+    height: auto; /* Mantén la proporción de la imagen */
+    display: block;
+}
+
+.logo-flex {
+    color: #00bcd4;
+}
+
+.logo-orthodontics {
+    color: #333;
+}
+
+/* Main */
+main {
+    max-width: 800px;
+    margin: 40px auto; /* Añade un margen superior de 40px */
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.highlight {
+    color: #00bcd4;
+}
+
+.slider-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.slider-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+label {
+    font-weight: bold;
+}
+
+/* Estilo para los sliders con animación */
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(to right, #00bcd4 0%, #00bcd4 var(--value, 0%), #ddd var(--value, 0%), #ddd 100%);
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #00bcd4;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+    transform: scale(1.2);
+}
+
+
+
+.range-value {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.description {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.payment-counter {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #00111B;
+    margin-top: 10px;
+}
+
+/* Botón para volver al formulario inicial */
+.return-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#returnButton {
+    background-color: #00bcd4;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#returnButton:hover {
+    background-color: #0199a8;
+}
+
+.slider-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;           /* Aumenta el espacio entre elementos del grupo */
+    align-items: center; /* Centra horizontalmente todos los elementos del grupo */
+    width: 100%;         /* Asegura que el grupo use el ancho disponible */
+    margin-bottom: 20px; /* Añade espacio debajo de cada grupo completo */
+}
+
+label {
+    font-weight: bold;
+    font-size: 1.1rem;    /* Un poco más grande la etiqueta */
+    color: #555;         /* Un gris un poco más oscuro */
+    margin-bottom: 5px;  /* Espacio debajo de la etiqueta */
+}
+
+input[type="range"] {
+    /* --- Tus estilos existentes para el slider --- */
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;        /* El slider ocupa el ancho */
+    max-width: 450px;   /* Limita el ancho máximo del slider */
+    height: 10px;       /* Un poco más grueso */
+    background: linear-gradient(to right, #00bcd4 0%, #00bcd4 var(--value, 0%), #ddd var(--value, 0%), #ddd 100%);
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+     /* Añade un margen si es necesario, aunque el gap del parent ya ayuda */
+     /* margin-top: 5px; */
+     /* margin-bottom: 5px; */
+}
+input[type="range"]::-webkit-slider-thumb {
+     /* --- Tus estilos existentes para el thumb --- */
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;   /* Un poco más grande */
+    height: 22px;  /* Un poco más grande */
+    background: #00bcd4;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+}
+input[type="range"]:hover::-webkit-slider-thumb {
+    transform: scale(1.2);
+}
+
+
+/* --- Estilos Mejorados para el Contador (.range-value) --- */
+.range-value {
+    font-size: 1.7rem;      /* Tamaño de fuente considerablemente mayor */
+    font-weight: 600;       /* Un grosor semi-bold */
+    color: #004A55;         /* Un color oscuro azul/verde azulado, profesional */
+    text-align: center;     /* Centra el texto */
+    width: 100%;            /* Ocupa todo el ancho para centrarse correctamente */
+    margin-top: 10px;       /* Espacio por encima del valor */
+    margin-bottom: 5px;    /* Espacio por debajo del valor */
+    display: block;         /* Asegura que ocupe su propia línea */
+    line-height: 1.2;       /* Ajusta la altura de línea si es necesario */
+}
+
+.description {
+    font-size: 0.8rem;      /* Tamaño de fuente para la descripción */
+    color: #777;            /* Color gris para la descripción */
+    text-align: center;     /* Centra el texto descriptivo */
+    width: 100%;
+    max-width: 450px;       /* Limita el ancho para que no sea demasiado largo */
+    margin-top: 5px;        /* Espacio encima de la descripción */
+}
+
+/* Ajuste opcional del contenedor principal si es necesario */
+.slider-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;             /* Aumenta el espacio vertical entre grupos de sliders */
+    align-items: center;   /* Centra los slider-group dentro del container */
+    width: 100%;           /* Asegura que el contenedor use el ancho */
+}
+
+main {
+    max-width: 600px; /* Puedes ajustar el ancho máximo del contenido principal */
+    margin: 40px auto;
+    padding: 20px; /* Añade padding interno si no lo tiene */
+}

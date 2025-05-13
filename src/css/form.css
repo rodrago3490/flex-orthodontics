@@ -1,0 +1,91 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Ajustar el tamaño de la imagen */
+.logo img {
+    max-width: 800px; /* Aumenta el ancho máximo */
+    height: auto; /* Mantén la proporción de la imagen */
+    display: block;
+}
+
+/* Main */
+main {
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Ajustar el tamaño del formulario */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Aumenta el espacio entre los elementos */
+    padding: 30px; /* Aumenta el relleno interno */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px; /* Aumenta el ancho máximo del formulario */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="number"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+}
+
+input[type="number"]:focus {
+    border-color: #00bcd4;
+    box-shadow: 0 0 5px rgba(0, 188, 212, 0.5);
+}
+
+.submit-button {
+    padding: 10px 20px;
+    background-color: #00bcd4;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    align-self: flex-start;
+}
+
+.submit-button:hover {
+    background-color: #0097a7;
+}

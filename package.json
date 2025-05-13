@@ -1,0 +1,27 @@
+{
+  "name": "flex-orthodontics",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "npm run minify-css && npm run minify-js",
+    "minify-css": "cleancss -o src/css/style.min.css src/css/style.css",
+    "minify-js": "terser src/js/payment_view.js -o src/js/payment_view.min.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "description": "Aplicación web para gestionar planes de pago de tratamientos de ortodoncia.",
+  "dependencies": {
+    "compression": "^1.8.0",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "clean-css-cli": "^5.5.2",
+    "nodemon": "^3.1.10",
+    "terser": "^5.14.2"
+  }
+}

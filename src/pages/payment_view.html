@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Plan - Flex ORTHODONTICS</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../images/logo_sin_fondo.ico" type="image/png">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../images/logo_index.png" alt="Logo">
+        </div>
+    </header>
+    <main>
+        <div class="slider-container">
+            <h2>Option 1</h2> <!-- Título para la primera opción -->
+            <!-- Slider 1: Down Payment -->
+            <div class="slider-group">
+                <label for="downPayment">Down Payment</label>
+                <input type="range" id="downPayment" name="downPayment" min="500" max="1000">
+                <span class="range-value" id="downPaymentValue">$500</span>
+                <p class="description">Between $500 and 35% of the total treatment price</p>
+            </div>
+
+            <!-- Slider 2: Mensualidad -->
+            <div class="slider-group">
+                <label for="monthlyPayment">Monthly payments <span id="monthlyPaymentMonthsLabel"></span></label>
+                <input type="range" id="monthlyPayment" name="monthlyPayment" min="50" max="1000">
+                <span class="range-value" id="monthlyPaymentValue">$50</span>
+            </div>
+
+            <h2>Option 2</h2> <!-- Título para la segunda opción -->
+            <!-- Slider 3: Extended Down Payment -->
+            <div class="slider-group">
+                <label for="extendedDownPayment">Down Payment</label>
+                <input type="range" id="extendedDownPayment" name="extendedDownPayment" min="500" max="1000">
+                <span class="range-value" id="extendedDownPaymentValue">$500</span>
+                <p class="description">Between $500 and 35% of the total treatment price</p>
+            </div>
+
+            <!-- Slider 4: Mensualidad Extendida -->
+            <div class="slider-group">
+                <label for="extendedMonthlyPayment">Mensualidad Extendida <span id="extendedMonthlyPaymentMonthsLabel"></span></label>
+                <input type="range" id="extendedMonthlyPayment" name="extendedMonthlyPayment" min="50" max="1000">
+                <span class="range-value" id="extendedMonthlyPaymentValue">$50</span>
+            </div>
+        </div>
+    
+        <!-- Botón para volver al formulario inicial -->
+        <div class="return-button-container">
+            <button id="returnButton" onclick="window.location.href='home.html'">Volver al formulario inicial</button>
+        </div>
+    </main>
+    <script src="../js/payment_view.js"></script>
+</body>
+</html>
