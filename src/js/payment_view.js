@@ -13,11 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Obtener los datos de localStorage
     const totalPrice = parseFloat(localStorage.getItem('totalPrice')) || 0;
-    const treatmentMonths = parseInt(localStorage.getItem('treatmentMonths')) || 0;
+    const rawTreatmentMonths = localStorage.getItem('treatmentMonths'); // Ver el valor crudo
+    console.log(`   %cRaw 'treatmentMonths' from localStorage:`, logStyles.label, rawTreatmentMonths);
+    const treatmentMonths = parseInt(rawTreatmentMonths) || 0; // Default to 0 if NaN or falsy
 
     console.log('%cDatos recuperados de localStorage:', logStyles.label);
     console.log(`   %cPrecio Total:`, logStyles.label, `$${totalPrice}`);
-    console.log(`   %cMeses Tratamiento:`, logStyles.label, treatmentMonths);
+    console.log(`   %cParsed 'treatmentMonths' (defaulted to 0 if NaN/falsy):`, logStyles.label, treatmentMonths); // Log del valor parseado
 
     // Validar datos iniciales
     if (!totalPrice || !treatmentMonths || totalPrice <= 0 || treatmentMonths <= 0) {
@@ -77,11 +79,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Función principal para actualizar todos los valores y sliders ---
     const updateValues = (updatedSliderId = null) => {
-        // console.groupCollapsed(`%c[PaymentView] Actualizando valores (Iniciado por: ${updatedSliderId || 'Inicial'})`, logStyles.info); // Grupo colapsado para no saturar
-        // Descomenta la línea anterior si quieres logs detallados en cada update
+        console.log(`%c[PaymentView] updateValues CALLED. Source: ${updatedSliderId || 'Initial Call'}. treatmentMonths: ${treatmentMonths}`, logStyles.info);
 
         let currentDownPayment = parseFloat(downPaymentSlider.value);
-        let currentExtendedDownPayment = parseFloat(extendedDownPaymentSlider.value);
+        let currentExtendedDownPayment = parseFloat(extendedDownPaymentSlider.value); // Asegurar que esta declaración esté presente
 
         // --- Lógica de Sincronización Inversa ---
         if (updatedSliderId === 'monthlyPayment') {
@@ -93,10 +94,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (updatedSliderId === 'extendedMonthlyPayment') {
            const currentExtendedMonthlyPayment = parseFloat(extendedMonthlyPaymentSlider.value);
+            // Recalcular currentExtendedDownPayment basado en el movimiento del slider de mensualidad extendida
             currentExtendedDownPayment = totalPrice - (currentExtendedMonthlyPayment * (treatmentMonths + 6));
             currentExtendedDownPayment = Math.max(minDownPayment, Math.min(currentExtendedDownPayment, maxDownPayment));
-            extendedDownPaymentSlider.value = currentExtendedDownPayment;
-             // console.log(`   Mensualidad Ext. movida a ${currentExtendedMonthlyPayment}, Down Payment Ext. ajustado a ${currentExtendedDownPayment.toFixed(2)}`);
+            extendedDownPaymentSlider.value = currentExtendedDownPayment; // Actualizar el slider de enganche extendido
         }
 
 
@@ -107,12 +108,36 @@ document.addEventListener('DOMContentLoaded', () => {
         const extendedMonths = treatmentMonths + 6;
         const extendedMonthlyPayment = extendedMonths > 0 ? extendedRemainingBalance / extendedMonths : 0;
 
+        console.log(`%c[PaymentView] updateValues: PRE-LABEL UPDATE. treatmentMonths: ${treatmentMonths}. monthlyPaymentMonthsLabel found: ${!!monthlyPaymentMonthsLabel}, extendedMonthlyPaymentMonthsLabel found: ${!!extendedMonthlyPaymentMonthsLabel}`, logStyles.label);
+        console.log("[PaymentView] monthlyPaymentMonthsLabel object:", monthlyPaymentMonthsLabel); // Log the object itself
+        console.log("[PaymentView] extendedMonthlyPaymentMonthsLabel object:", extendedMonthlyPaymentMonthsLabel); // Log the object itself
+
+
         // --- Actualizar etiquetas de meses ---
         if (monthlyPaymentMonthsLabel) {
-            monthlyPaymentMonthsLabel.textContent = `(${treatmentMonths} meses)`;
+            console.log(`%c[PaymentView] updateValues: Updating monthlyPaymentMonthsLabel. treatmentMonths: ${treatmentMonths}`, logStyles.info);
+            if (treatmentMonths && treatmentMonths > 0) {
+                monthlyPaymentMonthsLabel.textContent = `(${treatmentMonths} months)`;
+                console.log(`%c[PaymentView] monthlyPaymentMonthsLabel.textContent SET to: "${monthlyPaymentMonthsLabel.textContent}"`, logStyles.success);
+            } else {
+                monthlyPaymentMonthsLabel.textContent = '';
+                console.warn(`%c[PaymentView] updateValues: monthly treatmentMonths NOT valid (${treatmentMonths}). Label set to empty.`, logStyles.warn);
+            }
+        } else {
+            console.error("%c[PaymentView] updateValues: monthlyPaymentMonthsLabel IS NULL or UNDEFINED at point of use.", logStyles.error);
         }
+
         if (extendedMonthlyPaymentMonthsLabel) {
-            extendedMonthlyPaymentMonthsLabel.textContent = `(${extendedMonths} meses)`;
+            console.log(`%c[PaymentView] updateValues: Updating extendedMonthlyPaymentMonthsLabel. extendedMonths: ${extendedMonths}, treatmentMonths: ${treatmentMonths}`, logStyles.info);
+            if (extendedMonths && extendedMonths > 0 && treatmentMonths && treatmentMonths > 0) {
+                extendedMonthlyPaymentMonthsLabel.textContent = `(${extendedMonths} months)`;
+                console.log(`%c[PaymentView] extendedMonthlyPaymentMonthsLabel.textContent SET to: "${extendedMonthlyPaymentMonthsLabel.textContent}"`, logStyles.success);
+            } else {
+                extendedMonthlyPaymentMonthsLabel.textContent = '';
+                console.warn(`%c[PaymentView] updateValues: extended/treatmentMonths NOT valid (ext: ${extendedMonths}, treat: ${treatmentMonths}). Label set to empty.`, logStyles.warn);
+            }
+        } else {
+            console.error("%c[PaymentView] updateValues: extendedMonthlyPaymentMonthsLabel IS NULL or UNDEFINED at point of use.", logStyles.error);
         }
 
         // --- Actualizar los rangos (min/max) de los sliders de mensualidades ---

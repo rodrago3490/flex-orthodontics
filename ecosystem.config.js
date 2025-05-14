@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'gaston-practice',
+      name: 'flex-app',
       script: 'server.js',
       exec_mode: 'cluster', // Modo cluster para balanceo de carga
       env: {

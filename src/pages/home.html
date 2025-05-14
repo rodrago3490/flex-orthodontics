@@ -6,6 +6,13 @@
     <title>Home - Flex ORTHODONTICS</title>
     <link rel="stylesheet" href="../css/form.css">
     <link rel="icon" href="../images/logo_sin_fondo.ico" type="image/png">
+    <script>
+        // Limpiar localStorage al cargar la página
+        window.onload = () => {
+            localStorage.clear();
+            console.log('[Home] localStorage limpiado al cargar la página.');
+        };
+    </script>
 </head>
 <body>
     <header>
@@ -18,11 +25,11 @@
         <form class="form-container" id="treatmentForm">
             <div class="form-group">
                 <label for="totalPrice">Total treatment price</label>
-                <input type="number" id="totalPrice" name="totalPrice" placeholder="Introduce el precio total" required>
+                <input type="number" id="totalPrice" name="totalPrice" placeholder="Total price" required>
             </div>
             <div class="form-group">
                 <label for="treatmentMonths">Months</label>
-                <input type="number" id="treatmentMonths" name="treatmentMonths" placeholder="Introduce los meses" required>
+                <input type="number" id="treatmentMonths" name="treatmentMonths" placeholder="Total months" required>
             </div>
             <button type="submit" class="submit-button">Send</button>
         </form>

@@ -57,11 +57,19 @@ if (process.env.NODE_ENV === 'production') {
 
 // Ruta principal
 app.get('/', (req, res) => {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    res.setHeader('Surrogate-Control', 'no-store');
     res.sendFile(path.join(__dirname, 'src/pages/home.html'));
 });
 
 // Ruta para la vista de pagos
 app.get('/payment_view', (req, res) => {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    res.setHeader('Surrogate-Control', 'no-store');
     res.sendFile(path.join(__dirname, 'src/pages/payment_view.html'));
 });
 
