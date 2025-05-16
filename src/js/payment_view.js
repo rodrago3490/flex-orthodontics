@@ -199,6 +199,38 @@ document.addEventListener('DOMContentLoaded', () => {
     extendedMonthlyPaymentSlider.addEventListener('input', () => updateValues('extendedMonthlyPayment'));
     console.log('%cListeners añadidos a los sliders.', logStyles.success);
 
+    // Sincronizar el slider con el span editable
+    const syncSliderWithEditableSpan = (slider, editableSpan) => {
+        // Cuando el slider cambia, actualiza el span editable
+        slider.addEventListener('input', () => {
+            const value = parseFloat(slider.value).toFixed(2);
+            editableSpan.textContent = value;
+            updateValues(slider.id); // Llama a updateValues para recalcular
+        });
+
+        // Cuando el span editable pierde el foco, valida y actualiza el slider
+        editableSpan.addEventListener('blur', () => {
+            let value = parseFloat(editableSpan.textContent);
+            if (isNaN(value)) {
+                value = parseFloat(slider.min); // Si el valor no es válido, usa el mínimo del slider
+            }
+            const clampedValue = Math.min(Math.max(value, parseFloat(slider.min)), parseFloat(slider.max)); // Asegura que el valor esté dentro del rango
+            slider.value = clampedValue;
+            editableSpan.textContent = clampedValue.toFixed(2); // Corrige el valor mostrado si es inválido
+            updateValues(slider.id); // Llama a updateValues para recalcular
+        });
+
+        // Permitir solo números en el span editable
+        editableSpan.addEventListener('input', () => {
+            editableSpan.textContent = editableSpan.textContent.replace(/[^0-9.]/g, '');
+        });
+    };
+
+    // Configurar sincronización para cada slider y su span editable
+    syncSliderWithEditableSpan(downPaymentSlider, downPaymentValue);
+    syncSliderWithEditableSpan(monthlyPaymentSlider, monthlyPaymentValue);
+    syncSliderWithEditableSpan(extendedDownPaymentSlider, extendedDownPaymentValue);
+    syncSliderWithEditableSpan(extendedMonthlyPaymentSlider, extendedMonthlyPaymentValue);
 
     console.log('%c[PaymentView] Inicialización completada.', logStyles.success);
     console.groupEnd(); // Cierra el grupo principal de inicialización
