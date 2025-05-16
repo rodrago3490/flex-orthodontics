@@ -1,102 +1,128 @@
 /* src/css/style.css */
 
-/* General Reset */
+/* --- General Reset --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* --- Body --- */
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     color: #333;
-    background-color: #fff;
+    background-color: #f0f2f5;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* Header */
+/* --- Header --- */
 header {
     display: flex;
-    justify-content: center; /* Centrar logo si es el único elemento */
-    padding: 10px 20px;
-    margin-bottom: 20px; /* Añadir espacio debajo del header */
-}
-
-.logo {
-    width: auto; /* Ajustar para que el tamaño lo defina la imagen */
-    /* height: 50px; No es necesario si la imagen define la altura */
-    display: flex;
     justify-content: center;
-    align-items: center;
-    /* margin: 20px auto; Ya no es necesario si el header lo centra */
+    padding: 15px 20px;
+    margin-bottom: 30px;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .logo img {
-    max-width: 350px; /* Ajusta el ancho máximo del logo según necesites */
+    max-width: 300px;
     height: auto;
     display: block;
 }
 
-/* Main Content */
+/* --- Main Content Area --- */
 main {
-    max-width: 700px; /* Un poco más de ancho para los sliders */
-    margin: 20px auto; /* Reducir un poco el margen superior si el header ya tiene */
-    padding: 20px;
-    background-color: #f9f9f9; /* Un fondo sutil para el área principal */
+    max-width: 750px;
+    width: 100%;
+    margin: 0 auto 40px auto;
+    padding: 25px 30px; /* El padding principal puede reducirse si las tarjetas tienen mucho */
+    background-color: transparent; /* Hacemos transparente el fondo de main si las tarjetas tendrán el suyo */
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); Se puede quitar si las tarjetas tienen su propia sombra */
 }
 
-h1, h2 { /* Estilo para h2 también */
-    font-size: 1.8rem; /* Ajustar tamaño de h2 */
-    margin-bottom: 20px;
-    color: #333;
-    text-align: center; /* Centrar títulos de las opciones */
+/* --- Títulos (H1, H2) --- */
+h1 { /* Título general de la página si existiera */
+    color: #2c3e50; 
+    margin-bottom: 25px; 
+    text-align: center;
+    font-size: 2rem;
 }
+/* Los H2 ahora estarán dentro de las tarjetas */
 
-h2 {
-    font-size: 1.5rem; /* Tamaño específico para los H2 de "Option 1", "Option 2" */
-    margin-top: 30px; /* Espacio antes de cada nueva opción */
-    margin-bottom: 15px;
-    border-bottom: 1px solid #eee; /* Una línea sutil para separar */
-    padding-bottom: 10px;
-}
+.highlight { color: #00bcd4; }
 
-.highlight {
-    color: #00bcd4;
-}
-
+/* --- Contenedor de Sliders (Ahora de Tarjetas de Opción) --- */
 .slider-container {
     display: flex;
     flex-direction: column;
-    gap: 25px; /* Espacio entre grupos de sliders y títulos H2 */
+    gap: 30px; /* Espacio vertical entre las tarjetas de opciones de pago */
 }
 
+/* --- Tarjeta de Opción de Pago --- */
+.payment-option-card {
+    background-color: #ffffff;   /* Fondo blanco para la tarjeta */
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 25px 30px;          /* Padding interno de la tarjeta */
+    /* margin-bottom: 25px; No es necesario si .slider-container usa 'gap' */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07); /* Sombra para la tarjeta */
+}
+
+/* Estilos para los H2 dentro de las tarjetas de opción */
+.payment-option-card h2 {
+    font-size: 1.6rem;
+    color: #46A9B5; /* Un tono verde azulado para los H2 */
+    margin-top: 0; /* El H2 es el primer elemento de la tarjeta */
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #00bcd4;
+    text-align: center;
+}
+
+.payment-option-card h2 .total-price-display {
+    color: #46A9B5; /* Un color ligeramente diferente, o el mismo que el h2 */
+     font-size: 0.8em; /* Un tamaño de fuente más pequeño para el precio total */
+}
+
+/* --- Grupo de Slider --- */
 .slider-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
     align-items: center;
     width: 100%;
-    margin-bottom: 15px;
+    margin-bottom: 25px; /* Espacio debajo de cada grupo de slider dentro de la tarjeta */
+}
+
+/* El último slider-group en una tarjeta no necesita tanto margen inferior,
+   ya que el padding de la tarjeta proporcionará espacio. */
+.payment-option-card .slider-group:last-of-type {
+    margin-bottom: 5px; /* Un pequeño margen o 0 si el padding de la tarjeta es suficiente */
 }
 
 label {
     font-weight: bold;
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 3px;
+    font-size: 1.05rem;
+    color: #34495e;
+    margin-bottom: 5px;
 }
 
+/* --- Estilos para Sliders (input[type="range"]) --- */
 input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
-    max-width: 400px; /* Limitar ancho del slider */
-    height: 10px;
+    max-width: 450px;
+    height: 12px;
     background: linear-gradient(to right, #00bcd4 0%, #00bcd4 var(--value, 0%), #ddd var(--value, 0%), #ddd 100%);
-    border-radius: 5px;
+    border-radius: 6px;
     outline: none;
     cursor: pointer;
     transition: background 0.3s ease;
@@ -105,109 +131,92 @@ input[type="range"] {
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
     background: #00bcd4;
     border-radius: 50%;
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
     transition: transform 0.2s ease;
-    margin-top: -6px; /* Centrar verticalmente el thumb con el track */
+    margin-top: -6px; 
 }
-input[type="range"]::-moz-range-thumb { /* Estilos para Firefox */
-    width: 22px;
-    height: 22px;
+
+input[type="range"]::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
     background: #00bcd4;
     border-radius: 50%;
     cursor: pointer;
-    border: none; /* Firefox a veces añade un borde */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease;
 }
 
+input[type="range"]:hover::-webkit-slider-thumb { transform: scale(1.15); }
+input[type="range"]:hover::-moz-range-thumb { transform: scale(1.15); }
 
-input[type="range"]:hover::-webkit-slider-thumb {
-    transform: scale(1.2);
-}
-input[type="range"]:hover::-moz-range-thumb {
-    transform: scale(1.2);
-}
-
-
-/* --- Estilos Mejorados para el Contador (.range-value) --- */
+/* --- Estilos para el Contador Editable (.range-value) --- */
 .range-value {
-    font-size: 1.5rem; /* Ligeramente más pequeño para encajar mejor */
+    font-size: 1.6rem;
     font-weight: 600;
-    color: #004A55;
+    color: #041E42;
     text-align: center;
-    padding: 8px 12px;      /* Padding para que parezca un input */
-    border: 1px solid #ccc; /* Borde sutil */
-    border-radius: 5px;     /* Bordes redondeados como los inputs */
-    min-width: 120px;       /* Ancho mínimo para mostrar bien los números */
-    max-width: 150px;       /* Ancho máximo */
+    padding: 10px 15px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    min-width: 130px;
+    max-width: 180px;
     display: inline-block;
     cursor: text;
-    background-color: #fff; /* Fondo blanco para que destaque como campo editable */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
-    line-height: 1.2;       /* Ajuste de altura de línea */
-}
-
-.range-value:focus {
-    border-color: #00bcd4; /* Color del borde al enfocar, igual que los inputs del form */
-    box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.2); /* Sombra exterior al enfocar */
+    background-color: #fdfdfd;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    line-height: 1.3;
     outline: none;
 }
 
+.range-value:focus {
+    border-color: #00bcd4;
+    box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.25);
+}
+
+/* --- Descripción debajo del Slider --- */
 .description {
-    font-size: 0.8rem;
-    color: #777;
+    font-size: 0.85rem;
+    color: #7f8c8d;
     text-align: center;
     width: 100%;
-    max-width: 400px;
-    margin-top: 5px;
+    max-width: 450px;
+    margin-top: 8px;
 }
 
-.payment-counter { /* Si aún usas esta clase en algún lugar, asegúrate de que esté estilizada */
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #00111B;
-    margin-top: 10px;
-}
-
-/* Botón para volver al formulario inicial */
+/* --- Botón de Retorno --- */
 .return-button-container {
     display: flex;
     justify-content: center;
-    margin-top: 30px; /* Más espacio antes del botón */
+    margin-top: 40px;
 }
 
 #returnButton {
-    background-color: #00bcd4;
+    background-color: #3498db;
     color: #fff;
     border: none;
-    padding: 12px 25px; /* Botón un poco más grande */
-    font-size: 1rem;
+    padding: 12px 30px;
+    font-size: 1.05rem;
     font-weight: bold;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 #returnButton:hover {
-    background-color: #0199a8;
-    transform: translateY(-2px); /* Efecto sutil al pasar el ratón */
+    background-color: #2980b9;
+    transform: translateY(-2px);
 }
 
-/* Ajustes finales para alinear mejor el contenido de .slider-group */
-.slider-group label,
-.slider-group input[type="range"],
-.slider-group .range-value,
-.slider-group .description {
-    width: 100%; /* Asegura que ocupen el ancho disponible dentro de su max-width */
-    max-width: 400px; /* Consistencia en el ancho máximo */
-}
+/* --- Ajustes de Alineación y Ancho --- */
 
-.slider-group .range-value { /* Para centrar el texto del span cuando tiene max-width */
+.slider-group .range-value {
     margin-left: auto;
     margin-right: auto;
 }
