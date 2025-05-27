@@ -83,6 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
              slider.style.setProperty('--value', '0%');
              return;
          }
+         // Redondear el valor del slider a entero para que no tenga decimales
+         slider.value = Math.round(slider.value);
          const percentage = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
          slider.style.setProperty('--value', `${percentage}%`);
     };
@@ -143,24 +145,24 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(`   Rango Slider Mensual Ext.: ${extendedMonthlyPaymentSlider.min}-${extendedMonthlyPaymentSlider.max}`);
 
         if (document.activeElement !== downPaymentValueSpan) {
-            downPaymentValueSpan.textContent = `$${currentDownPayment.toFixed(2)}`;
+            downPaymentValueSpan.textContent = `$${parseInt(downPaymentSlider.value)}`;
         }
         if (document.activeElement !== monthlyPaymentValueSpan) {
             if (updatedSliderId === 'downPayment' || updatedSliderId === null) {
                  const newMonthlyVal = Math.max(parseFloat(monthlyPaymentSlider.min), Math.min(monthlyPayment, parseFloat(monthlyPaymentSlider.max)));
-                 monthlyPaymentSlider.value = newMonthlyVal.toFixed(2);
+                 monthlyPaymentSlider.value = Math.round(newMonthlyVal);
             }
-            monthlyPaymentValueSpan.textContent = `$${parseFloat(monthlyPaymentSlider.value).toFixed(2)}`;
+            monthlyPaymentValueSpan.textContent = `$${parseInt(monthlyPaymentSlider.value)}`;
         }
         if (document.activeElement !== extendedDownPaymentValueSpan) {
-            extendedDownPaymentValueSpan.textContent = `$${currentExtendedDownPayment.toFixed(2)}`;
+            extendedDownPaymentValueSpan.textContent = `$${parseInt(extendedDownPaymentSlider.value)}`;
         }
         if (document.activeElement !== extendedMonthlyPaymentValueSpan) {
             if (updatedSliderId === 'extendedDownPayment' || updatedSliderId === null) {
                 const newExtMonthlyVal = Math.max(parseFloat(extendedMonthlyPaymentSlider.min), Math.min(extendedMonthlyPayment, parseFloat(extendedMonthlyPaymentSlider.max)));
-                extendedMonthlyPaymentSlider.value = newExtMonthlyVal.toFixed(2);
+                extendedMonthlyPaymentSlider.value = Math.round(newExtMonthlyVal);
             }
-            extendedMonthlyPaymentValueSpan.textContent = `$${parseFloat(extendedMonthlyPaymentSlider.value).toFixed(2)}`;
+            extendedMonthlyPaymentValueSpan.textContent = `$${parseInt(extendedMonthlyPaymentSlider.value)}`;
         }
         
         if (updatedSliderId !== 'monthlyPayment' && parseFloat(monthlyPaymentSlider.min) < parseFloat(monthlyPaymentSlider.max)) {
@@ -188,29 +190,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 5. CONFIGURACIÓN INICIAL DE SLIDERS ---
     console.log('%cConfigurando valores y rangos iniciales de los sliders...', logStyles.info);
-    downPaymentSlider.min = minDownPayment.toFixed(2);
-    downPaymentSlider.max = maxDownPayment.toFixed(2);
-    downPaymentSlider.value = minDownPayment.toFixed(2);
+    downPaymentSlider.min = Math.round(minDownPayment);
+    downPaymentSlider.max = Math.round(maxDownPayment);
+    downPaymentSlider.value = Math.round(minDownPayment);
 
-    extendedDownPaymentSlider.min = minDownPayment.toFixed(2);
-    extendedDownPaymentSlider.max = maxDownPayment.toFixed(2);
-    extendedDownPaymentSlider.value = minDownPayment.toFixed(2);
+    extendedDownPaymentSlider.min = Math.round(minDownPayment);
+    extendedDownPaymentSlider.max = Math.round(maxDownPayment);
+    extendedDownPaymentSlider.value = Math.round(minDownPayment);
 
     // --- 6. EVENT LISTENERS PARA SLIDERS ---
     downPaymentSlider.addEventListener('input', () => {
-        downPaymentValueSpan.textContent = `$${parseFloat(downPaymentSlider.value).toFixed(2)}`;
+        downPaymentSlider.value = Math.round(downPaymentSlider.value);
+        downPaymentValueSpan.textContent = `$${parseInt(downPaymentSlider.value)}`;
         updateValues('downPayment');
     });
     monthlyPaymentSlider.addEventListener('input', () => {
-        monthlyPaymentValueSpan.textContent = `$${parseFloat(monthlyPaymentSlider.value).toFixed(2)}`;
+        monthlyPaymentSlider.value = Math.round(monthlyPaymentSlider.value);
+        monthlyPaymentValueSpan.textContent = `$${parseInt(monthlyPaymentSlider.value)}`;
         updateValues('monthlyPayment');
     });
     extendedDownPaymentSlider.addEventListener('input', () => {
-        extendedDownPaymentValueSpan.textContent = `$${parseFloat(extendedDownPaymentSlider.value).toFixed(2)}`;
+        extendedDownPaymentSlider.value = Math.round(extendedDownPaymentSlider.value);
+        extendedDownPaymentValueSpan.textContent = `$${parseInt(extendedDownPaymentSlider.value)}`;
         updateValues('extendedDownPayment');
     });
     extendedMonthlyPaymentSlider.addEventListener('input', () => {
-        extendedMonthlyPaymentValueSpan.textContent = `$${parseFloat(extendedMonthlyPaymentSlider.value).toFixed(2)}`;
+        extendedMonthlyPaymentSlider.value = Math.round(extendedMonthlyPaymentSlider.value);
+        extendedMonthlyPaymentValueSpan.textContent = `$${parseInt(extendedMonthlyPaymentSlider.value)}`;
         updateValues('extendedMonthlyPayment');
     });
     console.log('%cListeners de tipo "input" añadidos a todos los sliders.', logStyles.success);
@@ -226,8 +232,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 value = sliderMin;
             }
             value = Math.max(sliderMin, Math.min(value, sliderMax));
-            slider.value = value.toFixed(2);
-            editableSpan.textContent = `$${value.toFixed(2)}`;
+            value = Math.round(value); // Redondear siempre
+            slider.value = value;
+            editableSpan.textContent = `$${value}`;
             console.log(`%c[EditableSpan Blur] Slider ${slider.id} actualizado a: ${slider.value} desde span. Llamando a updateValues.`, logStyles.value);
             updateValues(slider.id);
         });
